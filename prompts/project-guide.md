@@ -8,6 +8,7 @@ but keep the project easy to migrate to TanStack Start.
 - Use REST API + React Query as the core data layer.
 - Keep Next.js-specific features thin and replaceable.
 - Make routing replaceable with minimal code movement.
+- read ./code-convention.md and keep that rule.
 
 ## Migration-friendly layering
 
@@ -51,8 +52,8 @@ The goal is a consistent, framework-agnostic data layer.
 
 Guidelines:
 
-- Centralize query keys in `src/lib/react-query/keys.ts`.
-- Keep shared query defaults in `src/lib/react-query/options.ts`.
+- Centralize query keys in `shared/lib/reactQuery/keys.ts`.
+- Keep shared query defaults in `shared/lib/react-query/options.ts`.
 - Split API calls from query hooks:
   - `features/*/api.ts` contains pure request functions.
   - `features/*/queries.ts` wires `useQuery` to those calls.

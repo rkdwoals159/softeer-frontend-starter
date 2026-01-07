@@ -5,6 +5,8 @@
 ### **🏗 Component Structure**
 
 - 함수형 컴포넌트를 사용하며, 컴포넌트 선언 후 변수, 함수, useEffect, return 문을 순서대로 작성.
+- 한 파일당 코드는 가능하면 100줄을 넘기지 않도록 하며, 최대 150줄을 넘기지 않는다.
+- 컴포넌트 파일 구성 순서: 타입/상수 → 훅 → 핸들러 → 렌더(return)
 
 ### **🏷️ Naming Conventions**
 
@@ -41,10 +43,15 @@ const [projectId, setProjectId] = useState<number>(0);
 - 이미지 : UPPER_SNAKE_CASE
 - 그 외 모두 : camelCase
 - 배열 변수는 `List` 접미사를 붙인다.
+- import 순서: 외부 라이브러리 → 내부 절대경로(`@/`) → 상대경로
+- 타입은 반드시 `import type`으로 분리한다.
 
 ### **📚 Type Definitions**
 
 - 커스텀 타입은 interface 대신 type 문법을 사용하며, 클래스를 사용할 때에는 interface 문법을 사용.
+- 타입 선언은 많아지면 같은 폴더에 `*.types.ts`로 분리한다.
+  - 예: `Button.tsx` → `Button.types.ts`, `HomeScreen.tsx` → `HomeScreen.types.ts`
+- 한 파일당 100줄을 넘기지 않도록 타입/로직을 분리한다.
 
 ```
 type FollowModalProps = {
@@ -64,6 +71,7 @@ function followModal({ onClickToggleModal, isFollowing }: FollowModalProps) { ..
 ### **⚙️ API Calls and Asynchronous Operations**
 
 - API 호출 시 async/await 구문을 활용하여 비동기 처리.
+- API 에러는 `normalizeApiError`로 통일한다.
 
 ```
 async function main() {
@@ -87,10 +95,27 @@ async function main() {
 - 브라우저 콘솔에 나타나는 경고와 오류를 최소화하며, 가능한 모든 경고를 처리.
 - 배포 환경에서는 개발자 도구를 비활성화하거나 경고를 무시하도록 설정하여 사용자 경험을 최적화.
 
+### **🧩 Folder Roles (FSD-lite)**
+
+- `entities/`: 도메인 모델과 데이터 접근 (types, queries, api)
+- `features/`: 유저 액션 중심 로직 (검색, 필터, 수정 등)
+- `widgets/`: 재사용 가능한 화면 단위 조합
+- `screens/`: 라우트 단위 화면 구성
+
+### **🔎 React Query Rules**
+
+- queryKey는 `src/shared/lib/reactQuery/keys.ts`에서만 정의한다.
+- API 호출과 `useQuery` 연결은 분리한다.
+
+### **📘 Storybook Rules**
+
+- `shared/ui` 컴포넌트는 기본 스토리를 작성한다.
+
 ### 코드 리뷰
 
 ---
 
+- 커밋 제목은 영어로 작성하고, body는 한글로 상세히 작성한다.
 - 24시가 넘으면, 코드 리뷰를 남기기 전에 언제까지 리뷰가 가능한지 슬랙 멘션으로 미리 알려준다.
 - PR merge 기준 : 전원 approve
 - 코드 리뷰의 기한
