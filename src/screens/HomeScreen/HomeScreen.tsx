@@ -1,8 +1,5 @@
 import Button from '@/shared/ui/Button/Button';
-
-type HomeScreenProps = {
-  title?: string;
-};
+import type { HomeScreenProps } from './HomeScreen.types';
 
 export default function HomeScreen({ title = 'Next.js 16 Starter' }: HomeScreenProps) {
   return (

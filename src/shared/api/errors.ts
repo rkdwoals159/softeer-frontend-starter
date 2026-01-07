@@ -1,11 +1,6 @@
 import axios from 'axios';
 
-type ApiError = {
-  status: number;
-  message: string;
-  code?: string;
-  details?: unknown;
-};
+import type { ApiError } from './errors.types';
 
 const DEFAULT_ERROR: ApiError = {
   status: 500,

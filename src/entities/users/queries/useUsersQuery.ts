@@ -3,10 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { userKeys } from '@/shared/lib/reactQuery/keys';
 
 import { fetchUsers } from '../apis/usersApi';
-
-type UseUsersQueryParams = {
-  page: number;
-};
+import type { UseUsersQueryParams } from './useUsersQuery.types';
 
 export default function useUsersQuery({ page }: UseUsersQueryParams) {
   return useQuery({

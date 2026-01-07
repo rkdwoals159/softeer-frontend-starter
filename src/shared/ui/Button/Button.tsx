@@ -1,9 +1,4 @@
-type ButtonProps = {
-  label: string;
-  onClick?: () => void;
-  type?: 'button' | 'submit' | 'reset';
-  variant?: 'primary' | 'ghost';
-};
+import type { ButtonProps } from './Button.types';
 
 export default function Button({
   label,
