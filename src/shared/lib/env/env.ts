@@ -4,8 +4,12 @@ Zod는 런타임 실제 값 검증하고, 실패하면 바로 알림/에러 처�
 스키마 하나로 타입도 추론하니까 타입 정의/검증을 따로 쓰지 않아도 됨. */
 
 // 즉 실제 들어오는 데이터가 깨졌을 때 안전장치로 사용됨
+const isProd = process.env.NODE_ENV === 'production';
+
 const envSchema = z.object({
-  NEXT_PUBLIC_API_BASE_URL: z.url(),
+  // dev/test에서는 API base URL을 생략해도 동작(axios가 상대경로로 호출 가능)
+  // production에서는 반드시 설정되도록 강제
+  NEXT_PUBLIC_API_BASE_URL: isProd ? z.url() : z.url().optional(),
   NEXT_PUBLIC_MOCKING: z.enum(['enabled', 'disabled']).optional(),
 });
 
