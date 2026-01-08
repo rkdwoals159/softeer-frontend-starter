@@ -1,3 +1,4 @@
 yarn lint --max-warnings=0
 yarn typecheck
+yarn format:check
 yarn test:e2e

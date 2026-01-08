@@ -11,6 +11,7 @@
     "start": "next start",
     "lint": "eslint",
     "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "storybook": "storybook dev -p 6006 --ci",
     "build-storybook": "storybook build",
     "test:e2e": "playwright test",
