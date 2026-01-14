@@ -1,3 +1,136 @@
+# 커밋
+
+---
+
+`ex) config: 백엔드 프로젝트 환경 설정`
+
+- feat: 기능 개발
+- docs: 문서 관련 작업
+- refactor: 기능 변경 없이 전반적 코드 구조 변경 (ex: 필드 이름 변경 등)
+- chore: 파일 내부가 아닌 파일 자체에 대한 변경 (ex: 폴더 이동 / 변경, 파일 이름 변경, 파일 삭제)
+- style: 코드 컨벤션 관련 작업
+- test: 테스트 코드 관련 작업
+- fix: 버그 수정
+- design: ui 관련 개발 및 수정
+- config: 외부 라이브러리 관련 추가 및 설정 (`build.gradle`)
+
+> **커밋 단위가 너무 커진다면 body 작성**
+
+```markdown
+config: 백엔드 프로젝트 환경 설정
+
+- 커밋에 대한 구체적인 설명1
+- 커밋에 대한 구체적인 설명2
+```
+
+# 브랜치
+
+---
+
+| **브랜치명**   | **설명**                                                 | **예시** | 규칙     |
+| -------------- | -------------------------------------------------------- | -------- | -------- |
+| main           | 배포를 위한 브랜치                                       |          | `삭제 X` |
+| develop        | 기능 개발을 위한 브랜치                                  |          | `삭제 X` |
+| feat/#이슈번호 | develop 브랜치에서 분기되어 이슈 단위 개발을 위한 브랜치 |
+
+- feat/#이슈번호
+- refactor/#이슈번호
+- test/#이슈번호 | feature/#10 | merge 후 삭제 |
+  | hotfix/#이슈번호 | 급한 이슈가 생겼을 시, main 브랜치에서 분기되어 문제를 해결하는 브랜치 | hotfix/#10 | merge 후 삭제 |
+
+```jsx
+- main
+- develop (default 브랜치)
+- feature/#10
+- hotfix/#4
+```
+
+# PR, 코드 리뷰
+
+---
+
+> **Merge 규칙**
+
+- 각 파트 전원의 Approve를 받아야 한다.
+- feat → develop : `Squash and merge`
+- etc) : `일반 merge`
+
+> **코드 리뷰 시 코멘트 분류**
+
+- 코멘트 확인 시 이모지를 달아둔다.
+- 리뷰 내용 규칙 ⇒ https://soojin.ro/review/review-comments
+- 오프라인 대화의 결론은 코멘트로 남겨둔다.
+
+# 이슈 템플릿
+
+---
+
+> 이슈 제목
+
+[FEAT] 이슈내용
+
+- 커밋과 구분되게 [#헤더]를 적는다
+
+```java
+### ✨ Description
+
+### ✨ Time(마감기한)
+```
+
+- 마일 스톤과 project를 할당한다.
+
+# PR 템플릿
+
+---
+
+> **PR 제목**
+
+feat: 이슈내용
+
+- Assignee을 할당한다.
+- Label을 할당한다.
+  - 라벨순서: 워크플로우(feature, refactor 등등)
+- Project를 할당한다.
+
+> **풀 리퀘 내용**
+
+- Assignees / Label 자동화
+- /noti로 웹 훅(디스코드) 공지
+
+```java
+# 🚩 연관 이슈
+closed #
+
+**# 🗣️ 리뷰 요구사항 (선택)**
+```
+
+---
+
+> **풀 리퀘 옵션 설정**
+
+- Reviewers를 할당한다.
+- Assignee을 할당한다.
+- Label을 할당한다.
+  - 라벨순서: 파트 - 워크플로우(feature, refactor 등등)
+- Project를 할당한다.
+
+# Tag
+
+> 백엔드 tag 명
+
+`v{major 기능 추가}.{minor 기능 추가}.{hotfix}`
+
+ex. v1.1.0
+
+<aside>
+💡 **목차**
+
+---
+
+</aside>
+
+---
+
 ### **🧹 Prettier && Eslint Rules**
 
 - **코드의 일관성을 위해 Prettier와 ESLint 규칙을 엄격히 준수. 가능한 규칙을 변경하거나 예외를 만들지 않도록 한다.**
@@ -5,8 +138,7 @@
 ### **🏗 Component Structure**
 
 - 함수형 컴포넌트를 사용하며, 컴포넌트 선언 후 변수, 함수, useEffect, return 문을 순서대로 작성.
-- 한 파일당 코드는 가능하면 100줄을 넘기지 않도록 하며, 최대 150줄을 넘기지 않는다.
-- 컴포넌트 파일 구성 순서: 타입/상수 → 훅 → 핸들러 → 렌더(return)
+- 각 파일당 코드 줄 수는 가능하면 100줄을 넘기지 않으며, 최대 150줄을 넘기지 않는다.
 
 ### **🏷️ Naming Conventions**
 
@@ -43,15 +175,10 @@ const [projectId, setProjectId] = useState<number>(0);
 - 이미지 : UPPER_SNAKE_CASE
 - 그 외 모두 : camelCase
 - 배열 변수는 `List` 접미사를 붙인다.
-- import 순서: 외부 라이브러리 → 내부 절대경로(`@/`) → 상대경로
-- 타입은 반드시 `import type`으로 분리한다.
 
 ### **📚 Type Definitions**
 
 - 커스텀 타입은 interface 대신 type 문법을 사용하며, 클래스를 사용할 때에는 interface 문법을 사용.
-- 타입 선언은 많아지면 같은 폴더에 `*.types.ts`로 분리한다.
-  - 예: `Button.tsx` → `Button.types.ts`, `HomeScreen.tsx` → `HomeScreen.types.ts`
-- 한 파일당 100줄을 넘기지 않도록 타입/로직을 분리한다.
 
 ```
 type FollowModalProps = {
@@ -71,7 +198,6 @@ function followModal({ onClickToggleModal, isFollowing }: FollowModalProps) { ..
 ### **⚙️ API Calls and Asynchronous Operations**
 
 - API 호출 시 async/await 구문을 활용하여 비동기 처리.
-- API 에러는 `normalizeApiError`로 통일한다.
 
 ```
 async function main() {
@@ -94,22 +220,6 @@ async function main() {
 
 - 브라우저 콘솔에 나타나는 경고와 오류를 최소화하며, 가능한 모든 경고를 처리.
 - 배포 환경에서는 개발자 도구를 비활성화하거나 경고를 무시하도록 설정하여 사용자 경험을 최적화.
-
-### **🧩 Folder Roles (FSD-lite)**
-
-- `entities/`: 도메인 모델과 데이터 접근 (types, queries, api)
-- `features/`: 유저 액션 중심 로직 (검색, 필터, 수정 등)
-- `widgets/`: 재사용 가능한 화면 단위 조합
-- `screens/`: 라우트 단위 화면 구성
-
-### **🔎 React Query Rules**
-
-- queryKey는 `src/shared/lib/reactQuery/keys.ts`에서만 정의한다.
-- API 호출과 `useQuery` 연결은 분리한다.
-
-### **📘 Storybook Rules**
-
-- `shared/ui` 컴포넌트는 기본 스토리를 작성한다.
 
 ### 코드 리뷰
 

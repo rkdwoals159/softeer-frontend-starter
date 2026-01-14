@@ -38,6 +38,9 @@ jobs:
       - name: Lint
         run: yarn lint
 
+      - name: Conventions
+        run: yarn lint:conventions
+
       - name: Typecheck
         run: yarn typecheck
 
