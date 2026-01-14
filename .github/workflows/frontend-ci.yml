@@ -1,18 +1,26 @@
-name: CI
+name: Frontend CI
 
 on:
   pull_request:
+    paths:
+      - "frontend/**"
+      - ".github/workflows/frontend-ci.yml"
   push:
-    branches:
-      - main
+    branches: [main]
+    paths:
+      - "frontend/**"
+      - ".github/workflows/frontend-ci.yml"
 
 jobs:
-  build:
+  ci:
     runs-on: ubuntu-latest
     environment: starter-env
     env:
       NEXT_PUBLIC_API_BASE_URL: ${{ secrets.NEXT_PUBLIC_API_BASE_URL }}
       NEXT_PUBLIC_MOCKING: ${{ secrets.NEXT_PUBLIC_MOCKING }}
+    defaults:
+      run:
+        working-directory: frontend
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -22,6 +30,7 @@ jobs:
         with:
           node-version: 25.2.1
           cache: yarn
+          cache-dependency-path: frontend/yarn.lock
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
@@ -31,6 +40,9 @@ jobs:
 
       - name: Typecheck
         run: yarn typecheck
+
+      - name: E2E
+        run: yarn test:e2e
 
       - name: Build
         run: yarn build

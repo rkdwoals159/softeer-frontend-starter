@@ -16,7 +16,7 @@
     "build-storybook": "storybook build",
     "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
-    "prepare": "husky",
+    "prepare": "cd .. && git config core.hooksPath frontend/.husky/_",
     "postinstall": "playwright install --with-deps"
   },
   "lint-staged": {
