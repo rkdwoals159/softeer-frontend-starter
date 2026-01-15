@@ -4,7 +4,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { useEffect } from 'react';
 
 import { env } from '@/shared/lib/env/env';
-import Devtools from '@/shared/lib/reactQuery/Devtools';
+import Devtools from '@/shared/lib/reactQuery/devTools';
 import { queryClient } from '@/shared/lib/reactQuery/queryClient';
 import type { ProvidersProps } from './Providers.types';
 

@@ -10,13 +10,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "lint:conventions": "node scripts/check-conventions.mjs",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "storybook": "storybook dev -p 6006 --ci",
     "build-storybook": "storybook build",
     "test:e2e": "playwright test",
     "typecheck": "tsc --noEmit",
-    "prepare": "husky",
+    "prepare": "cd .. && git config core.hooksPath frontend/.husky/_",
     "postinstall": "playwright install --with-deps"
   },
   "lint-staged": {
@@ -39,6 +40,8 @@
     "zustand": "^5.0.9"
   },
   "devDependencies": {
+    "@commitlint/cli": "^20.3.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@playwright/test": "^1.57.0",
     "@storybook/nextjs": "^10.1.11",
     "@storybook/react": "^10.1.11",
