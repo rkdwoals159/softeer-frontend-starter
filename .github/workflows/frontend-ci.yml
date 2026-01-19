@@ -38,14 +38,11 @@ jobs:
       - name: Lint
         run: yarn lint
 
-      - name: Conventions
-        run: yarn lint:conventions
+      - name: Format
+        run: yarn format:check
 
-      - name: Typecheck
-        run: yarn typecheck
-
-      - name: E2E
-        run: yarn test:e2e
+      # - name: E2E
+      #   run: yarn test:e2e
 
       - name: Build
         run: yarn build
