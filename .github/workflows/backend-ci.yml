@@ -7,7 +7,6 @@ on:
     branches:
       - develop
       - main
-      - test
 
 permissions:
   contents: read
